@@ -1,4 +1,325 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 body,
 html {
     margin: 0;
+    font-family: "Inter", sans-serif;
+    background-color: var(--gray--50);
+}
+
+:root {
+
+    /* Color styles */
+    --base-white: rgba(255, 255, 255, 1);
+    --base---black: rgba(0, 0, 0, 1);
+    --gray--25: rgba(252, 252, 253, 1);
+    --gray--50: rgba(248, 250, 252, 1);
+    --gray--100: rgba(238, 242, 246, 1);
+    --gray--200: rgba(227, 232, 239, 1);
+    --gray--300: rgba(205, 213, 223, 1);
+    --gray--400: rgba(154, 164, 178, 1);
+    --gray--500: rgba(113, 120, 130, 1);
+    --gray--600: rgba(85, 90, 97, 1);
+    --gray--700: rgba(64, 70, 79, 1);
+    --gray--800: rgba(43, 48, 56, 1);
+    --gray--900: rgba(28, 31, 36, 1);
+    --gray--950: rgba(14, 15, 16, 1);
+    --primary--25: rgba(240, 236, 253, 1);
+    --primary--50: rgba(209, 197, 249, 1);
+    --primary--100: rgba(179, 159, 245, 1);
+    --primary--200: rgba(148, 120, 241, 1);
+    --primary--300: rgba(118, 82, 237, 1);
+    --primary--400: rgba(87, 43, 233, 1);
+    --primary--500: rgba(66, 22, 212, 1);
+    --primary--600: rgba(54, 18, 173, 1);
+    --primary--700: rgba(42, 14, 135, 1);
+    --primary--800: rgba(30, 10, 96, 1);
+    --primary--900: rgba(18, 6, 58, 1);
+    --primary--950: rgba(6, 2, 19, 1);
+    --error--25: rgba(255, 251, 250, 1);
+    --error--50: rgba(254, 243, 242, 1);
+    --error--100: rgba(254, 228, 226, 1);
+    --error--200: rgba(254, 205, 202, 1);
+    --error--300: rgba(253, 162, 155, 1);
+    --error--400: rgba(249, 112, 102, 1);
+    --error--500: rgba(240, 68, 56, 1);
+    --error--600: rgba(217, 45, 32, 1);
+    --error--700: rgba(180, 35, 24, 1);
+    --error--800: rgba(145, 32, 24, 1);
+    --error--900: rgba(122, 39, 26, 1);
+    --error--950: rgba(85, 22, 12, 1);
+    --warning--25: rgba(255, 252, 245, 1);
+    --warning--50: rgba(255, 250, 235, 1);
+    --warning--100: rgba(254, 240, 199, 1);
+    --warning--200: rgba(254, 223, 137, 1);
+    --warning--300: rgba(254, 200, 75, 1);
+    --warning--400: rgba(253, 176, 34, 1);
+    --warning--500: rgba(247, 144, 9, 1);
+    --warning--600: rgba(220, 104, 3, 1);
+    --warning--700: rgba(181, 71, 8, 1);
+    --warning--800: rgba(147, 55, 13, 1);
+    --warning--900: rgba(122, 46, 14, 1);
+    --warning--950: rgba(78, 29, 9, 1);
+    --success--25: rgba(246, 254, 249, 1);
+    --success--50: rgba(237, 252, 242, 1);
+    --success--100: rgba(211, 248, 223, 1);
+    --success--200: rgba(170, 240, 196, 1);
+    --success--300: rgba(115, 226, 163, 1);
+    --success--400: rgba(60, 203, 127, 1);
+    --success--500: rgba(22, 179, 100, 1);
+    --success--600: rgba(9, 146, 80, 1);
+    --success--700: rgba(8, 116, 67, 1);
+    --success--800: rgba(9, 92, 55, 1);
+    --success--900: rgba(8, 76, 46, 1);
+    --success--950: rgba(5, 46, 28, 1);
+    --teal--25: rgba(246, 254, 252, 1);
+    --teal----50: rgba(240, 253, 249, 1);
+    --teal----100: rgba(204, 251, 239, 1);
+    --teal----200: rgba(153, 246, 224, 1);
+    --teal----300: rgba(95, 233, 208, 1);
+    --teal----400: rgba(46, 211, 183, 1);
+    --teal--500: rgba(21, 183, 158, 1);
+    --teal----600: rgba(14, 147, 132, 1);
+    --teal----700: rgba(16, 117, 105, 1);
+    --teal----800: rgba(18, 93, 86, 1);
+    --teal----900: rgba(19, 78, 72, 1);
+    --teal--950: rgba(10, 41, 38, 1);
+    --indigo--25: rgba(245, 248, 255, 1);
+    --indigo--50: rgba(238, 244, 255, 1);
+    --indigo--100: rgba(224, 234, 255, 1);
+    --indigo--200: rgba(199, 215, 254, 1);
+    --indigo--300: rgba(164, 188, 253, 1);
+    --indigo--400: rgba(128, 152, 249, 1);
+    --indigo--500: rgba(97, 114, 243, 1);
+    --indigo--600: rgba(68, 76, 231, 1);
+    --indigo--700: rgba(53, 56, 205, 1);
+    --indigo--800: rgba(45, 49, 166, 1);
+    --indigo--900: rgba(45, 50, 130, 1);
+    --indigo--950: rgba(31, 35, 91, 1);
+    --pink--25: rgba(254, 246, 251, 1);
+    --pink--50: rgba(253, 242, 250, 1);
+    --pink--100: rgba(252, 231, 246, 1);
+    --pink--200: rgba(252, 206, 238, 1);
+    --pink--300: rgba(250, 167, 224, 1);
+    --pink--400: rgba(246, 112, 199, 1);
+    --pink--500: rgba(238, 70, 188, 1);
+    --pink--600: rgba(221, 37, 144, 1);
+    --pink--700: rgba(193, 21, 116, 1);
+    --pink--800: rgba(158, 22, 95, 1);
+    --pink--900: rgba(133, 22, 81, 1);
+    --pink--950: rgba(78, 13, 48, 1);
+    --avatar-user-square---olivia--rhye-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---phoenix--baker-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---lana--steiner-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---demi--wilkinson-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---candice--wu-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---natali--craig-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---drew--cano-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---orlando--diggs-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---andi--lane-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---kate--morrison-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---koray--okumus-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---ava--wright-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---eve--leroy-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---zahir--mays-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---joshua--wilson-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---rene--wells-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---lori--bryson-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---anaiah--whitten-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---noah--pierre-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---katherine--moss-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---mollie--hall-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---eduard--franze-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---alec--whitten-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---eva--bond-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---sophia--perez-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---lyle--kauffman-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---kelly--williams-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---lucy--bond-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---alisa--hester-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---rosalee--melvin-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---loki--bright-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---aliah--lane-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---anita--cruz-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---kari--rasmussen-neutral-background: rgba(224, 224, 224, 1);
+    --avatar-user-square---nala--goins-neutral-background: rgba(224, 224, 224, 1);
+
+    /* Text-size styles */
+    --primary---display-2xl---regular: 72px;
+    --primary---display-2xl---medium: 72px;
+    --primary---display-2xl---semibold: 72px;
+    --primary---display-2xl---bold: 72px;
+    --primary---display-xl---regular: 60px;
+    --primary---display-xl---medium: 60px;
+    --primary---display-xl---semibold: 60px;
+    --primary---display-xl---bold: 60px;
+    --primary---display-lg---regular: 48px;
+    --primary---display-lg---medium: 48px;
+    --primary---display-lg---semibold: 48px;
+    --primary---display-lg---bold: 48px;
+    --primary---display-md---regular: 36px;
+    --primary---display-md---medium: 36px;
+    --primary---display-md---semibold: 36px;
+    --primary---display-md---bold: 36px;
+    --primary---display-sm---regular: 30px;
+    --primary---display-sm---medium: 30px;
+    --primary---display-sm---semibold: 30px;
+    --primary---display-sm---bold: 30px;
+    --primary---display-sm---medium-italic: 30px;
+    --primary---display-xs---regular: 24px;
+    --primary---display-xs---medium: 24px;
+    --primary---display-xs---semibold: 24px;
+    --primary---display-xs---bold: 24px;
+    --primary---display-xs---medium-italic: 24px;
+    --primary---text-xl---regular: 20px;
+    --primary---text-xl---medium: 20px;
+    --primary---text-xl---semibold: 20px;
+    --primary---text-xl---bold: 20px;
+    --primary---text-xl---regular-italic: 20px;
+    --primary---text-xl---medium-italic: 20px;
+    --primary---text-xl---semibold-italic: 20px;
+    --primary---text-xl---bold-italic: 20px;
+    --primary---text-xl---regular-underlined: 20px;
+    --primary---text-lg---regular: 18px;
+    --primary---text-lg---medium: 18px;
+    --primary---text-lg---semibold: 18px;
+    --primary---text-lg---bold: 18px;
+    --primary---text-lg---regular-italic: 18px;
+    --primary---text-lg---medium-italic: 18px;
+    --primary---text-lg---semibold-italic: 18px;
+    --primary---text-lg---bold-italic: 18px;
+    --primary---text-lg---regular-underlined: 18px;
+    --primary---text-lg---medium-underlined: 18px;
+    --primary---text-md---regular: 16px;
+    --primary---text-md---medium: 16px;
+    --primary---text-md---semibold: 16px;
+    --primary---text-md---bold: 16px;
+    --primary---text-md---regular-italic: 16px;
+    --primary---text-md---medium-italic: 16px;
+    --primary---text-md---semibold-italic: 16px;
+    --primary---text-md---bold-italic: 16px;
+    --primary---text-md---regular-underlined: 16px;
+    --primary---text-md---medium-underlined: 16px;
+    --primary---text-sm---regular: 14px;
+    --primary---text-sm---medium: 14px;
+    --primary---text-sm---semibold: 14px;
+    --primary---text-sm---bold: 14px;
+    --primary---text-sm---regular-underlined: 14px;
+    --primary---text-sm---medium-underlined: 14px;
+    --primary---text-xs---regular: 12px;
+    --primary---text-xs---medium: 12px;
+    --primary---text-xs---semibold: 12px;
+    --primary---text-xs---bold: 12px;
+    --secondary---display-2xl---regular: 72px;
+    --secondary---display-2xl---medium: 72px;
+    --secondary---display-2xl---semibold: 72px;
+    --secondary---display-2xl---bold: 72px;
+    --secondary---display-xl---regular: 60px;
+    --secondary---display-xl---medium: 60px;
+    --secondary---display-xl---semibold: 60px;
+    --secondary---display-xl---bold: 60px;
+    --secondary---display-lg---regular: 48px;
+    --secondary---display-lg---medium: 48px;
+    --secondary---display-lg---semibold: 48px;
+    --secondary---display-md---regular: 36px;
+    --secondary---display-md---medium: 36px;
+    --secondary---display-md---semibold: 36px;
+    --secondary---display-md---bold: 36px;
+    --secondary---display-sm---regular: 30px;
+    --secondary---display-sm---medium: 30px;
+    --secondary---display-sm---semibold: 30px;
+    --secondary---display-sm---bold: 30px;
+    --secondary---display-xs---regular: 24px;
+    --secondary---display-xs---medium: 24px;
+    --secondary---display-xs---semibold: 24px;
+    --secondary---display-xs---bold: 24px;
+    --secondary---text-xl---regular: 20px;
+    --secondary---text-xl---medium: 20px;
+    --secondary---text-xl---semibold: 20px;
+    --secondary---text-xl---bold: 20px;
+    --secondary---text-lg---regular: 18px;
+    --secondary---text-lg---medium: 18px;
+    --secondary---text-lg---semibold: 18px;
+    --secondary---text-lg---bold: 18px;
+    --secondary---text-md---regular: 16px;
+    --secondary---text-md---medium: 16px;
+    --secondary---text-md---semibold: 16px;
+    --secondary---text-md---bold: 16px;
+    --secondary---text-sm---regular: 14px;
+    --secondary---text-sm---medium: 14px;
+    --secondary---text-sm---semibold: 14px;
+    --secondary---text-sm---bold: 14px;
+    --secondary---text-xs---regular: 12px;
+    --secondary---text-xs---medium: 12px;
+    --secondary---text-xs---semibold: 12px;
+    --secondary---text-xs---bold: 12px;
+
+    /* Effect styles */
+    --focus-ring--4px-primary-100: 0px 0px 0px rgba(224, 239, 255, 1);
+    --focus-ring--4px-gray-100: 0px 0px 0px rgba(238, 242, 246, 1);
+    --focus-ring--4px-error-100: 0px 0px 0px rgba(254, 228, 226, 1);
+    --focus-ring--4px-gray-500: 0px 0px 0px rgba(105, 117, 134, 1);
+    --focus-ring--4px-primary-500: 0px 0px 0px rgba(129, 184, 245, 1);
+    --focus-ring--2px-primary-100: 0px 0px 0px rgba(224, 239, 255, 1);
+    --focus-ring--2px-primary-400: 0px 0px 0px 2px rgba(151, 199, 252, 1);
+    /* using for button */
+    --shadow--xs: 0px 1px 2px rgba(16, 24, 40, 0.05);
+    /* using for button */
+    --shadow--xs-focused-4px-primary-100: 0px 0px 0px 4px rgba(224, 239, 255, 1), 0px 1px 2px rgba(16, 24, 40, 0.05);
+    /* using for button */
+    --shadow--xs-focused-4px-gray-100: 0px 0px 0px 4px rgba(238, 242, 246, 1), 0px 1px 2px rgba(16, 24, 40, 0.05);
+    /* using for button */
+    --shadow--xs-focused-4px-error-100: 0px 0px 0px 4px rgba(254, 228, 226, 1), 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    /* using for button */
+    --shadow--sm: 0px 1px 2px rgba(16, 24, 40, 0.06), 0px 1px 3px rgba(16, 24, 40, 0.1);
+    --shadow--sm-focused-4px-primary-100: 0px 0px 0px rgba(224, 239, 255, 1), 0px 1px 2px rgba(16, 24, 40, 0.06), 0px 1px 3px rgba(16, 24, 40, 0.1);
+    --shadow--sm-focused-4px-gray-100: 0px 0px 0px rgba(238, 242, 246, 1), 0px 1px 2px rgba(16, 24, 40, 0.06), 0px 1px 3px rgba(16, 24, 40, 0.1);
+    --shadow--md: 0px 2px 4px rgba(16, 24, 40, 0.06), 0px 4px 8px rgba(16, 24, 40, 0.1);
+    --shadow--lg: 0px 4px 6px rgba(16, 24, 40, 0.03), 0px 12px 16px rgba(16, 24, 40, 0.08);
+    --shadow--xl: 0px 8px 8px rgba(16, 24, 40, 0.03), 0px 20px 24px rgba(16, 24, 40, 0.08);
+    --shadow--2xl: 0px 24px 48px rgba(16, 24, 40, 0.18);
+    --shadow--3xl: 0px 32px 64px rgba(16, 24, 40, 0.14);
+    --background-blur--sm: ;
+    --background-blur--md: ;
+    --background-blur----lg: ;
+    --background-blur----xl: ;
+
+}
+
+label {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--gray--700);
+}
+
+p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--gray--600);
+    margin: 0;
+}
+
+code {
+    background-color: #efefef;
+    border-radius: 5px;
+    padding: 2px 6px;
+    color: var(--gray--600);
+    font-weight: 400;
+}
+
+h2 {
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 38px;
+    color: var(--gray--900);
+    margin: 0;
+}
+
+h3 {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--gray--800);
 }
