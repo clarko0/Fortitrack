@@ -105,7 +105,15 @@ public class ExerciseManager : IManager<ExerciseDto, Exercise, ExerciseFilters>
         return query.Select(e => new ExerciseDto(
             e.Id, // : id
             e.Name, // : name
-            e.ExerciseSets.Any() ? e.ExerciseSets.Max(es => es.Weight) : 0, // : maximumWeight
+
+            e.ExerciseSets
+                .Any(e => e.ArchivedOn == null) ?
+                    e.ExerciseSets
+                        .Where(es => es.ArchivedOn == null)
+                        .Max(es => es.Weight)
+                    : 0, // : maximumWeight
+
+
             e.ExerciseSets
                 .Where(es => es.ArchivedOn == null)
                 .OrderByDescending(es => es.Date)

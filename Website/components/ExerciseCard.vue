@@ -12,8 +12,8 @@
 
         <div class="badges">
             
-            <Badge type="success">
-                {{ exercise.maximumWeight }} kg
+            <Badge v-if="(exercise.maximumWeight ?? 0) > 0" type="success">
+                {{ exercise.maximumWeight }}kg One Rep Max
             </Badge>
 
         </div>

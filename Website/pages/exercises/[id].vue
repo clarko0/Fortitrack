@@ -5,6 +5,13 @@
             <Button variant="link" style="padding: 0;">Go Back</Button>
         </RouterLink>
         <h2>{{ exercise.name }}</h2>
+        <div class="badges">
+
+            <Badge v-if="(exercise.maximumWeight ?? 0) > 0" type="success">
+                {{ exercise.maximumWeight }}kg One Rep Max
+            </Badge>
+
+        </div>
     </div>
 
     <div class="page-content">
@@ -24,6 +31,7 @@
                     <TableHead>Date</TableHead>
                     <TableHead>Weight</TableHead>
                     <TableHead>Reps</TableHead>
+                    <TableHead class="text-right">Actions</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
@@ -33,8 +41,11 @@
     
                 <TableRow v-for="record in exercise.exerciseSets" :key="record.id">
                     <TableCell>{{ dateString(record.date ?? "") }}</TableCell>
-                    <TableCell>{{ record.weight }}</TableCell>
+                    <TableCell>{{ record.weight }} kg</TableCell>
                     <TableCell>{{ record.repCount }}</TableCell>
+                    <TableCell class="text-right">
+                        <Button variant="destructive" @click="deleteRecord(record.id ?? 0)">Delete</Button>
+                    </TableCell>
                 </TableRow>
             </TableBody>
         </Table>
@@ -90,6 +101,11 @@ async function fetchExercise() {
     data.exercise = exercise;
 }
 
+async function deleteRecord(id: number) {
+    await apiClients.set.archive(id);
+    await fetchExercise();
+}
+
 function dateString(date: string) {
     return new Date(date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 }
@@ -103,6 +119,13 @@ const exercise = computed(() => data.exercise);
 
 .page-content {
     margin-top: 2em;
+}
+
+.badges {
+    display: flex;
+    gap: 1em;
+    margin-top: 0.5em;
+    
 }
 
 </style>

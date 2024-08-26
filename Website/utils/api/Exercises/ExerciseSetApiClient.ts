@@ -23,4 +23,9 @@ export const exerciseSetApiClient = {
         const response = await exerciseSetApiClient.client.put<TExerciseSet>("", set);
         return response;
     },
+
+    archive: async (id : number) : Promise<TExerciseSet> => {
+        const response = await exerciseSetApiClient.client.delete<TExerciseSet>(`/${id}`);
+        return response;
+    }
 };
