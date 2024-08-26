@@ -4,7 +4,8 @@ export type TExercise = {
     id?: number,
     name?: string,
 
-    exerciseSets : TExerciseSet[],
+    maximumWeight?: number,
+    exerciseSets? : TExerciseSet[],
     
     createdOn?: Date,
     lastUpdatedOn?: Date,

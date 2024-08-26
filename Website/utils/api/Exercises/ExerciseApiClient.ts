@@ -14,13 +14,13 @@ export const exerciseApiClient = {
         return response;
     },
 
-    create: async (exercise : TExercise) => {
-        const response = await exerciseApiClient.client.post("", exercise);
+    create: async (exercise : TExercise) : Promise<TExercise> => {
+        const response = await exerciseApiClient.client.put<TExercise>("", exercise);
         return response;
     },
 
-    update: async (exercise : any) => {
-        const response = await exerciseApiClient.client.put("", exercise);
+    update: async (exercise : TExercise) : Promise<TExercise> => {
+        const response = await exerciseApiClient.client.put<TExercise>("", exercise);
         return response;
     },
 };

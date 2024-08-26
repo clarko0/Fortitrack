@@ -1,6 +1,15 @@
 <template>
 
-    <div>
+    <Popover>
+        <PopoverTrigger>
+          <Button variant="outline">Create Exercise</Button>
+        </PopoverTrigger>
+        <PopoverContent>
+            <CreateExerciseForm @creation="fetchExercises()"/>
+        </PopoverContent>
+    </Popover>
+
+    <div class="cards-container">
         <ExerciseCard v-if="allExercises && allExercises.length > 0" v-for="(exercise, index) in allExercises" :exercise="exercise" />
     </div>
 
@@ -10,17 +19,19 @@
 import { apiClients } from '~/utils/api/ApiClients';
 import { ExerciseCard } from '#components';
 import { callWithNuxt, type NuxtError } from '#app';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
+import type { TExercise } from '~/types/TExercise';
 
-const { data } = useAsyncData(async () => {
+useAsyncData(async () => {
 
     const nuxtApp = useNuxtApp();
 
     try {
-        const allExercises = await apiClients?.exercise?.list();
-
-        return {
-            allExercises
-        };
+        await fetchExercises();
     }
     catch (e: unknown) {
         const err = e as NuxtError;
@@ -29,10 +40,27 @@ const { data } = useAsyncData(async () => {
     
 });
 
-const allExercises = computed(() => data?.value?.allExercises);
+const data = reactive({
+    allExercises: [] as TExercise[]
+});
+
+async function fetchExercises() {
+    const exercises = await apiClients.exercise.list();
+    data.allExercises = exercises;
+}
+
+const allExercises = computed(() => data?.allExercises);
 
 </script>
 
-<style>
+<style scoped>
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 2em;
+    grid-gap: 1em;
+}
 
 </style>

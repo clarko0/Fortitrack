@@ -1,3 +1,4 @@
+using Common.DataManagement;
 using Common.Managers;
 using DataModels;
 using Server.Business.DataTransferObjects;
@@ -24,7 +25,7 @@ public class ExerciseManager : IManager<ExerciseDto, Exercise, ExerciseFilters>
         return queryResult;
     }
 
-    public void ArchiveById(int id)
+    public ExerciseDto ArchiveById(int id)
     {
         ExerciseFilters filters = new(id);
 
@@ -40,12 +41,15 @@ public class ExerciseManager : IManager<ExerciseDto, Exercise, ExerciseFilters>
             throw new Exception($"Could not find exercise with id: ({id})");
         }
 
+        exercise.LastUpdatedOn = DateTime.UtcNow;
         exercise.ArchivedOn = DateTime.UtcNow;
 
         _dataContext.SaveChanges();
+
+        return GetById(id);
     }
 
-    public void Create(ExerciseDto dto)
+    public ExerciseDto Create(ExerciseDto dto)
     {
         Exercise dbExercise = new();
 
@@ -71,6 +75,8 @@ public class ExerciseManager : IManager<ExerciseDto, Exercise, ExerciseFilters>
         _dataContext.Exercises.Add(dbExercise);
 
         _dataContext.SaveChanges();
+
+        return GetById(dbExercise.Id);
     }
 
     public ExerciseDto GetById(int id)
@@ -99,7 +105,9 @@ public class ExerciseManager : IManager<ExerciseDto, Exercise, ExerciseFilters>
         return query.Select(e => new ExerciseDto(
             e.Id, // : id
             e.Name, // : name
+            e.ExerciseSets.Any() ? e.ExerciseSets.Max(es => es.Weight) : 0, // : maximumWeight
             e.ExerciseSets
+                .Where(es => es.ArchivedOn == null)
                 .Select(es => new ExerciseSetDto(
                     es.Id, // : id
                     es.ExerciseId, // : exerciseId
@@ -110,6 +118,7 @@ public class ExerciseManager : IManager<ExerciseDto, Exercise, ExerciseFilters>
                     es.LastUpdatedOn, // : lastUpdatedOn
                     es.ArchivedOn // : archivedOn
                 ))
+                .OrderByDescending(es => es.Date)
                 .ToList(), // : exerciseSets
             e.CreatedOn, // : createdOn
             e.LastUpdatedOn, // : lastUpdatedOn
@@ -117,7 +126,7 @@ public class ExerciseManager : IManager<ExerciseDto, Exercise, ExerciseFilters>
         ));
     }
 
-    public void Update(ExerciseDto dto)
+    public ExerciseDto Update(ExerciseDto dto)
     {
         ExerciseFilters filters = new(dto.Id);
 
@@ -150,6 +159,8 @@ public class ExerciseManager : IManager<ExerciseDto, Exercise, ExerciseFilters>
         dbExercise.LastUpdatedOn = DateTime.UtcNow;
 
         _dataContext.SaveChanges();
+
+        return GetById(dbExercise.Id);
     }
 
     public IQueryable<Exercise> ApplyFilters(IQueryable<Exercise> query, ExerciseFilters filters)
@@ -165,6 +176,20 @@ public class ExerciseManager : IManager<ExerciseDto, Exercise, ExerciseFilters>
         {
             query = query
                 .Where(e => e.Name.Contains(filters.Name));
+        }
+
+        bool applyDeletedFilter = filters.Deleted != InclusionEnum.Both;
+        if (applyDeletedFilter)
+        {
+            bool showDeletedOnly = filters.Deleted == InclusionEnum.Only;
+            if (showDeletedOnly)
+            {
+                query = query.Where(e => e.ArchivedOn.HasValue);
+            }
+            else
+            {
+                query = query.Where(e => e.ArchivedOn == null);
+            }
         }
 
         return query;

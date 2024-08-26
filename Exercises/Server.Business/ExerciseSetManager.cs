@@ -1,3 +1,4 @@
+using Common.DataManagement;
 using Common.Managers;
 using DataModels;
 using Server.Business.DataTransferObjects;
@@ -46,16 +47,19 @@ public class ExerciseSetManager : IManager<ExerciseSetDto, ExerciseSet, Exercise
         return queryResult;
     }
 
-    public void ArchiveById(int id)
+    public ExerciseSetDto ArchiveById(int id)
     {
         ExerciseSet exerciseSet = GetExerciseSetByIdAndValidate(id);
 
         exerciseSet.ArchivedOn = DateTime.UtcNow;
+        exerciseSet.LastUpdatedOn = DateTime.UtcNow;
 
         _dataContext.SaveChanges();
+
+        return GetById(id);
     }
 
-    public void Create(ExerciseSetDto dto)
+    public ExerciseSetDto Create(ExerciseSetDto dto)
     {
         ExerciseSet dbExerciseSet = new();
 
@@ -71,9 +75,11 @@ public class ExerciseSetManager : IManager<ExerciseSetDto, ExerciseSet, Exercise
 
         _dataContext.ExerciseSets.Add(dbExerciseSet);
         _dataContext.SaveChanges();
+
+        return GetById(dbExerciseSet.Id);
     }
 
-    public void Update(ExerciseSetDto dto)
+    public ExerciseSetDto Update(ExerciseSetDto dto)
     {
         ExerciseSet dbExerciseSet = GetExerciseSetByIdAndValidate(dto.Id.Value);
 
@@ -100,6 +106,8 @@ public class ExerciseSetManager : IManager<ExerciseSetDto, ExerciseSet, Exercise
         dbExerciseSet.LastUpdatedOn = DateTime.UtcNow;
 
         _dataContext.SaveChanges();
+
+        return GetById(dbExerciseSet.Id);
     }
 
     public IQueryable<ExerciseSetDto> SelectAsDto(IQueryable<ExerciseSet> query)
@@ -122,6 +130,20 @@ public class ExerciseSetManager : IManager<ExerciseSetDto, ExerciseSet, Exercise
         if (applyIdFilter)
         {
             query = query.Where(e => e.Id == filters.Id);
+        }
+
+        bool applyDeletedFilter = filters.Deleted != InclusionEnum.Both;
+        if (applyDeletedFilter)
+        {
+            bool showDeletedOnly = filters.Deleted == InclusionEnum.Only;
+            if (showDeletedOnly)
+            {
+                query = query.Where(e => e.ArchivedOn.HasValue);
+            }
+            else
+            {
+                query = query.Where(e => e.ArchivedOn == null);
+            }
         }
 
         return query;

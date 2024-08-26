@@ -19,8 +19,8 @@ public class ExerciseSetController : IApiController<IActionResult, ExerciseSetDt
     [Route("/sets/{id}")]
     public IActionResult ArchiveById(int id)
     {
-        _exerciseSetManager.ArchiveById(id);
-        return new OkResult();
+        ExerciseSetDto result = _exerciseSetManager.ArchiveById(id);
+        return new JsonResult(result);
     }
 
     [HttpGet]
@@ -43,16 +43,18 @@ public class ExerciseSetController : IApiController<IActionResult, ExerciseSetDt
     [Route("/sets")]
     public IActionResult Upsert(ExerciseSetDto video)
     {
+        ExerciseSetDto result;
+
         bool exerciseSetIsMissingId = video.Id is null;
         if (exerciseSetIsMissingId)
         {
-            _exerciseSetManager.Create(video);
+            result = _exerciseSetManager.Create(video);
         }
         else
         {
-            _exerciseSetManager.Update(video);
+            result = _exerciseSetManager.Update(video);
         }
 
-        return new OkResult();
+        return new JsonResult(result);
     }
 }

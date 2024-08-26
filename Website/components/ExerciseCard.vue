@@ -1,6 +1,6 @@
 <template>
 
-    <div class="exercise-card">
+    <RouterLink :to="`/exercises/${exercise.id}`" class="exercise-card">
 
         <div class="image-container">
             <img src="https://blogscdn.thehut.net/app/uploads/sites/478/2021/01/calories-weight-lifting-HERO-min_1642171338.jpg" alt="weight">
@@ -12,13 +12,13 @@
 
         <div class="badges">
             
-            <Badge>
-                {{ exercise.exerciseSets }}
+            <Badge type="success">
+                {{ exercise.maximumWeight }} kg
             </Badge>
 
         </div>
 
-    </div>
+    </RouterLink>
 
 </template>
 
@@ -30,7 +30,7 @@ export type ExerciseCardProps = {
 }
 
 const props = withDefaults(defineProps<ExerciseCardProps>(), {});
-
+    
 const exercise = computed(() => props.exercise);
 
 </script>
@@ -48,6 +48,13 @@ const exercise = computed(() => props.exercise);
     display: grid;
     grid-template-rows: 225px 48px;
     grid-gap: 16px;
+
+    cursor: pointer;
+}
+
+.exercise-card:hover .image-container img {
+    transform: scale(1.1);
+    filter: blur(4px);
 }
 
 .image-container {
@@ -60,6 +67,7 @@ const exercise = computed(() => props.exercise);
 
 .image-container img {
     height: 100%;
+    transition: 0.3s;
     object-fit: cover;
 }
 

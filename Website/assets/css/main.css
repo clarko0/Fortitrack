@@ -323,3 +323,7 @@ h3 {
     line-height: 24px;
     color: var(--gray--800);
 }
+
+body {
+    padding: 8em 8em;
+}

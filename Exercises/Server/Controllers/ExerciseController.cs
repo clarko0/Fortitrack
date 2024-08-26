@@ -19,8 +19,8 @@ public class ExerciseController : IApiController<IActionResult, ExerciseDto, Exe
     [Route("/exercises/{id}")]
     public IActionResult ArchiveById(int id)
     {
-        _exerciseManager.ArchiveById(id);
-        return new OkResult();
+        ExerciseDto result = _exerciseManager.ArchiveById(id);
+        return new JsonResult(result);
     }
 
 
@@ -44,16 +44,18 @@ public class ExerciseController : IApiController<IActionResult, ExerciseDto, Exe
     [Route("/exercises")]
     public IActionResult Upsert(ExerciseDto exercise)
     {
+        ExerciseDto result;
+
         bool exerciseIsMissingId = exercise.Id is null;
         if (exerciseIsMissingId)
         {
-            _exerciseManager.Create(exercise);
+            result = _exerciseManager.Create(exercise);
         }
         else
         {
-            _exerciseManager.Update(exercise);
+            result = _exerciseManager.Update(exercise);
         }
 
-        return new OkResult();
+        return new JsonResult(result);
     }
 }
