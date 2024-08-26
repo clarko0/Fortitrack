@@ -108,6 +108,7 @@ public class ExerciseManager : IManager<ExerciseDto, Exercise, ExerciseFilters>
             e.ExerciseSets.Any() ? e.ExerciseSets.Max(es => es.Weight) : 0, // : maximumWeight
             e.ExerciseSets
                 .Where(es => es.ArchivedOn == null)
+                .OrderByDescending(es => es.Date)
                 .Select(es => new ExerciseSetDto(
                     es.Id, // : id
                     es.ExerciseId, // : exerciseId
@@ -118,7 +119,6 @@ public class ExerciseManager : IManager<ExerciseDto, Exercise, ExerciseFilters>
                     es.LastUpdatedOn, // : lastUpdatedOn
                     es.ArchivedOn // : archivedOn
                 ))
-                .OrderByDescending(es => es.Date)
                 .ToList(), // : exerciseSets
             e.CreatedOn, // : createdOn
             e.LastUpdatedOn, // : lastUpdatedOn
