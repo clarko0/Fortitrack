@@ -26,7 +26,7 @@ import {
 } from '@/components/ui/popover'
 import type { TExercise } from '~/types/TExercise';
 
-useAsyncData(async () => {
+onMounted(async () => {
 
     const nuxtApp = useNuxtApp();
 

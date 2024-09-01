@@ -8,7 +8,7 @@
         <div class="badges">
 
             <Badge v-if="(exercise.maximumWeight ?? 0) > 0" type="success">
-                {{ exercise.maximumWeight }}kg One Rep Max
+                {{ exercise.maximumWeight }}kg
             </Badge>
 
         </div>
@@ -77,7 +77,7 @@ import {
 const route = useRoute();
 const exerciseRouteId = computed(() => parseInt(route.params.id.toString()));
 
-useAsyncData(async () => {
+onMounted(async () => {
 
     const nuxtApp = useNuxtApp();
 
